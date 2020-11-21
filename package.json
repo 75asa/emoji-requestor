@@ -1,0 +1,24 @@
+{
+  "name": "emoji-syncher",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:75asa/emoji-syncher.git",
+  "author": "Asato Nago <nago@tam-bourine.co.jp>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^14.14.9"
+  },
+  "scripts": {
+    "start": "node dest/index.js",
+    "build": "tsc -p .",
+    "build:watch": "tsc --watch",
+    "build:remote": "make gcr-push && make gcr-deploy",
+    "logs": "gcloud app logs read",
+    "logs:tail": "gcloud app logs tail"
+  },
+  "dependencies": {
+    "@slack/bolt": "^2.4.1",
+    "dotenv": "^8.2.0",
+    "typescript": "^4.1.2"
+  }
+}
