@@ -42,3 +42,6 @@ gcr-deploy:
 gcr-open:
 	open https://console.cloud.google.com/run?hl=ja&project=$(PROJECT)
 
+# general -------
+init:
+	export STAGE=$(STAGE)
