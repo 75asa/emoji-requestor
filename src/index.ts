@@ -1,18 +1,14 @@
-import { App } from "@slack/bolt";
-import * as dotenv from "dotenv";
-dotenv.config({ path: `envs/.env.${process.env.STAGE}` });
+import * as slack from "./slack";
+import * as handler from "./handler";
+import * as constant from "./constant";
 
-const app = new App({
-  token: process.env.SLACK_BOT_TOKEN,
-  signingSecret: process.env.SLACK_SIGNING_SECRET,
-});
+const app = slack.bolt.app;
 
-app.command("/ping", async ({ command, ack, say, respond }) => {
-  console.log(command);
-
+app.command("/ping", async ({ command, payload, ack, say }) => {
+  console.log({ command, payload });
   // コマンドリクエストを確認
   await ack();
-  await say(`pong`)
+  await say(`pong !!`)
     .then(res => {
       console.log({ res });
     })
@@ -21,9 +17,31 @@ app.command("/ping", async ({ command, ack, say, respond }) => {
     });
 });
 
+app.command("/sync-emoji", async ({ command, ack, say }) => {
+  console.log(command);
+  // コマンドリクエストを確認
+  await ack();
+  say("sync start !!");
+  const result = await handler.syncEmoji(app);
+  await say(`sync done !! ${result}`)
+    .then(res => {
+      console.log({ res });
+    })
+    .catch(err => {
+      console.log({ err });
+    });
+});
+
+slack.bolt.receiver.app.get("sync-emoji", (req, res) => {
+  res.sendStatus(200);
+  handler.syncEmoji(app);
+});
+
+handler.catchEmojiEvent(app);
+
 (async () => {
   // Start your app
-  await app.start(process.env.APP_LISTEN_PORT);
+  await app.start(constant.General.PORT);
 
   console.log("⚡️ Bolt app is running!");
 })();
