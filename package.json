@@ -1,25 +1,7 @@
 {
   "name": "emoji-syncher",
   "version": "1.0.0",
-  "main": "index.js",
-  "repository": "git@github.com:75asa/emoji-syncher.git",
   "author": "Asato Nago <nago@tam-bourine.co.jp>",
-  "license": "MIT",
-  "devDependencies": {
-    "@types/node": "^14.14.9",
-    "@types/node-fetch": "^2.5.7",
-    "nodemon": "^2.0.6",
-    "ts-node": "^9.0.0"
-  },
-  "scripts": {
-    "start": "node dest/index.js",
-    "build": "tsc -p .",
-    "build:live": "nodemon --watch 'src/**/*.ts' --exec \"ts-node\" src/index.ts",
-    "build:watch": "tsc --watch",
-    "build:remote": "make gcr-push && make gcr-deploy",
-    "logs": "gcloud app logs read",
-    "logs:tail": "gcloud app logs tail"
-  },
   "dependencies": {
     "@slack/bolt": "^2.4.1",
     "dotenv": "^8.2.0",
@@ -28,5 +10,35 @@
     "image-data-uri": "^2.0.1",
     "node-fetch": "^2.6.1",
     "typescript": "^4.1.2"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.9",
+    "@types/node-fetch": "^2.5.7",
+    "fixpack": "^3.0.6",
+    "husky": "^4.3.6",
+    "nodemon": "^2.0.6",
+    "ts-node": "^9.0.0"
+  },
+  "engines": {
+    "yarn": "1.*",
+    "node": "12.x"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "fixpack && git add package.json"
+    }
+  },
+  "license": "MIT",
+  "main": "index.js",
+  "repository": "git@github.com:75asa/emoji-syncher.git",
+  "scripts": {
+    "build": "tsc -p .",
+    "build:live": "nodemon --watch 'src/**/*.ts' --exec \"ts-node\" src/index.ts",
+    "build:remote": "make gcr-push && make gcr-deploy",
+    "build:watch": "tsc --watch",
+    "compile": "tsc",
+    "logs": "gcloud app logs read",
+    "logs:tail": "gcloud app logs tail",
+    "start": "node dest/index.js"
   }
 }
