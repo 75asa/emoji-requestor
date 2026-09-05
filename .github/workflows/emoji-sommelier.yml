@@ -3,7 +3,7 @@ name: emoji-sommelier
 on:
   push:
     branches:
-      - main
+      - master
     paths:
       - "packages/emoji-sommelier/**"
       - ".github/workflows/emoji-sommelier.yml"

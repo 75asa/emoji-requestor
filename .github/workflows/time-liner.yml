@@ -3,7 +3,7 @@ name: time-liner
 on:
   push:
     branches:
-      - main
+      - master
     paths:
       - "packages/time-liner/**"
       - ".github/workflows/time-liner.yml"

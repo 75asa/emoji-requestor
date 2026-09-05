@@ -3,7 +3,7 @@ name: slack-activator
 on:
   push:
     branches:
-      - main
+      - master
     paths:
       - "packages/slack-activator/**"
       - ".github/workflows/slack-activator.yml"
