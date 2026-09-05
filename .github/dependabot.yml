@@ -1,0 +1,30 @@
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+  - package-ecosystem: npm
+    directory: /packages/time-liner
+    schedule:
+      interval: monthly
+    groups:
+      time-liner:
+        patterns:
+          - "*"
+  - package-ecosystem: npm
+    directory: /packages/emoji-sommelier
+    schedule:
+      interval: monthly
+    groups:
+      emoji-sommelier:
+        patterns:
+          - "*"
+  - package-ecosystem: npm
+    directory: /packages/slack-activator
+    schedule:
+      interval: monthly
+    groups:
+      slack-activator:
+        patterns:
+          - "*"

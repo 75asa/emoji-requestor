@@ -11,7 +11,7 @@ export const getEmoji = async () => {
       Authorization: `Bearer ${constant.Kibela.TOKEN}`,
       "Content-Type": "application/json",
       Accept: "application/json",
-      "User-Agent": constant.Kibela.TOKEN,
+      "User-Agent": constant.Kibela.USER_AGENT,
     },
     body: JSON.stringify({
       query: printGql(query.emojiMutation),

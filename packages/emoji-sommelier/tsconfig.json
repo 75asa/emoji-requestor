@@ -1,20 +1,30 @@
 {
   "compilerOptions": {
-    "target": "ES2018",
+    "target": "ES2022",
     "module": "commonjs",
     "sourceMap": true,
     "outDir": "./dest",
     "strict": true,
     "moduleResolution": "node",
-    "noUnusedLocals": true
+    "noUnusedLocals": true,
+    "lib": [
+      "ES2022"
+    ],
+    "esModuleInterop": true,
+    "skipLibCheck": true
   },
-  "typeRoots": ["node_modules/@types"],
+  "typeRoots": [
+    "node_modules/@types"
+  ],
   "rootDir": "src",
-  "include": ["src/**/*.ts"],
-  "exclude": ["node_modeles"],
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
   "compileOnSave": true,
-  "types": ["src/types/*"],
-  "rules": {
-    "eofline": true
-  }
+  "types": [
+    "src/types/*"
+  ]
 }

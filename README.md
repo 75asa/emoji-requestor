@@ -11,9 +11,9 @@
 
 | パッケージ | 概要 | 元リポジトリ | Node / パッケージマネージャ |
 | --- | --- | --- | --- |
-| [`packages/time-liner`](packages/time-liner) | 指定 Slack チャンネルの投稿を別チャンネルへ転送する Bolt アプリ (分報 TL) | [75asa/time-liner](https://github.com/75asa/time-liner) | 12.x / yarn 1 |
-| [`packages/emoji-sommelier`](packages/emoji-sommelier) | Slack に登録したカスタム絵文字を Kibela などの他サービスへ同期する | [75asa/emoji-sommelier](https://github.com/75asa/emoji-sommelier) | 12.x / yarn 1 |
-| [`packages/slack-activator`](packages/slack-activator) | Slack のオンライン状態 (auto / away) を CLI・スケジュールで切り替える | [75asa/slack-activator](https://github.com/75asa/slack-activator) | 18+ / yarn 3 (corepack) |
+| [`packages/time-liner`](packages/time-liner) | 指定 Slack チャンネルの投稿を別チャンネルへ転送する Bolt アプリ (分報 TL) | [75asa/time-liner](https://github.com/75asa/time-liner) | 20+ / yarn 1 |
+| [`packages/emoji-sommelier`](packages/emoji-sommelier) | Slack に登録したカスタム絵文字を Kibela などの他サービスへ同期する | [75asa/emoji-sommelier](https://github.com/75asa/emoji-sommelier) | 20+ / yarn 1 |
+| [`packages/slack-activator`](packages/slack-activator) | Slack のオンライン状態 (auto / away) を CLI・スケジュールで切り替える | [75asa/slack-activator](https://github.com/75asa/slack-activator) | 20+ / yarn 3 (corepack) |
 
 各パッケージは独立して動作する。ルートに workspace 設定は置いていないので、
 それぞれのディレクトリに入って `yarn` を実行する。

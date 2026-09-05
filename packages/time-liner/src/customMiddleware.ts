@@ -89,7 +89,7 @@ export const getFileInfo: any = async ({
       {
         hosted: [],
         files: [],
-      }
+      },
     );
   }
   await next();
@@ -128,7 +128,7 @@ export const enableAll: any = async (app: App): Promise<void> => {
       args.logger.debug(
         "Dumping request data for debugging...\n\n" +
           JSON.stringify(copiedArgs, null, 2) +
-          "\n"
+          "\n",
       );
       const result = await args.next();
       // console.log({result})

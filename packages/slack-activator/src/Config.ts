@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 
-dotenv.config().parsed;
+dotenv.config();
 
 export namespace Config {
   export const Mode = {

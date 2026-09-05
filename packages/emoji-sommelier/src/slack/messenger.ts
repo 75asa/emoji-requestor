@@ -32,27 +32,29 @@ const generateOption = ({ context, event }: GenerateMessage) => {
         ],
       },
     ],
+    ...(isAddEvent && event.value && event.name
+      ? {
+          attachments: [
+            {
+              blocks: [
+                {
+                  type: "section",
+                  text: {
+                    type: "mrkdwn",
+                    text: " ",
+                  },
+                  accessory: {
+                    type: "image",
+                    image_url: event.value,
+                    alt_text: event.name,
+                  },
+                },
+              ],
+            },
+          ],
+        }
+      : {}),
   };
-  if (isAddEvent) {
-    option.attachments = [
-      {
-        blocks: [
-          {
-            type: "section",
-            text: {
-              type: "mrkdwn",
-              text: " ",
-            },
-            accessory: {
-              type: "image",
-              image_url: event.value,
-              alt_text: event.name,
-            },
-          },
-        ],
-      },
-    ];
-  }
   return option;
 };
 

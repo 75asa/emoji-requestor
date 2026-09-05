@@ -1,6 +1,7 @@
 import * as slack from "./slack";
 import * as handler from "./handler";
 import * as constant from "./constant";
+import type { Request, Response } from "express";
 
 const app = slack.bolt.app;
 
@@ -32,7 +33,7 @@ app.command("/sync-emoji", async ({ command, ack, say }) => {
     });
 });
 
-slack.bolt.receiver.app.get("sync-emoji", (req, res) => {
+slack.bolt.receiver.app.get("sync-emoji", (req: Request, res: Response) => {
   res.sendStatus(200);
   handler.syncEmoji(app);
 });

@@ -3,6 +3,7 @@ import { ChatPostMessageArguments } from "@slack/web-api";
 import dotenv from "dotenv";
 import * as middleware from "./customMiddleware";
 import * as blocKit from "./block";
+import { TimelineMessage } from "./bolt.interface";
 
 dotenv.config();
 
@@ -25,16 +26,19 @@ app.use(middleware.addUsersInfoContext);
 app.use(middleware.getFileInfo);
 
 app.message(middleware.getChannelInfo, async ({ client, context, message }) => {
+  // subtype 付き (message_changed, bot_message など) は転送しない
+  if (message.subtype !== undefined) return;
+  const msg = message as TimelineMessage;
   const msgOption: ChatPostMessageArguments = {
     token: client.token,
     channel: process.env.CHANNEL_NAME,
-    text: message.text,
+    text: msg.text,
     unfurl_links: true,
     link_names: true,
     unfurl_media: true,
     icon_url: context.profile.image_original,
     username: context.profile.display_name || context.profile.real_name,
-    blocks: await blocKit.dealBlock({ context, message }),
+    blocks: await blocKit.dealBlock({ context, message: msg }),
   };
 
   console.log("1回目", JSON.stringify(msgOption, null, 4));
@@ -66,7 +70,7 @@ app.message(middleware.getChannelInfo, async ({ client, context, message }) => {
             reject("error");
           }
         });
-      })
+      }),
     )
       .then(async (result) => {
         await result.forEach((value) => {
