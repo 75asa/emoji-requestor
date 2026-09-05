@@ -1,0 +1,31 @@
+name: time-liner
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "packages/time-liner/**"
+      - ".github/workflows/time-liner.yml"
+  pull_request:
+    paths:
+      - "packages/time-liner/**"
+      - ".github/workflows/time-liner.yml"
+
+defaults:
+  run:
+    working-directory: packages/time-liner
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "12.x"
+          cache: yarn
+          cache-dependency-path: packages/time-liner/yarn.lock
+      - run: yarn install --frozen-lockfile --ignore-scripts
+      - run: yarn lint
+      - run: yarn compile

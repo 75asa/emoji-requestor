@@ -1,0 +1,30 @@
+name: emoji-sommelier
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "packages/emoji-sommelier/**"
+      - ".github/workflows/emoji-sommelier.yml"
+  pull_request:
+    paths:
+      - "packages/emoji-sommelier/**"
+      - ".github/workflows/emoji-sommelier.yml"
+
+defaults:
+  run:
+    working-directory: packages/emoji-sommelier
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "12.x"
+          cache: yarn
+          cache-dependency-path: packages/emoji-sommelier/yarn.lock
+      - run: yarn install --frozen-lockfile --ignore-scripts
+      - run: yarn compile

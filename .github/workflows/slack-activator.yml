@@ -1,0 +1,32 @@
+name: slack-activator
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "packages/slack-activator/**"
+      - ".github/workflows/slack-activator.yml"
+  pull_request:
+    paths:
+      - "packages/slack-activator/**"
+      - ".github/workflows/slack-activator.yml"
+
+defaults:
+  run:
+    working-directory: packages/slack-activator
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "18.x"
+          cache: yarn
+          cache-dependency-path: packages/slack-activator/yarn.lock
+      - run: corepack enable
+      - run: yarn install --immutable
+      - run: yarn lint
+      - run: yarn build

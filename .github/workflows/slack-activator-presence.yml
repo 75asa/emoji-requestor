@@ -1,0 +1,49 @@
+name: slack-activator presence
+
+# Slack のオンライン状態を平日の始業/終業時刻に切り替える (JST 10:00 auto / 18:00 away)
+on:
+  schedule:
+    - cron: "0 1 * * 1-5"
+    - cron: "0 9 * * 1-5"
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "auto | away"
+        required: true
+        default: "auto"
+        type: choice
+        options:
+          - auto
+          - away
+
+env:
+  SLACK_USER_TOKEN: ${{ secrets.SLACK_USER_TOKEN }}
+
+defaults:
+  run:
+    working-directory: packages/slack-activator
+
+jobs:
+  presence:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "18.x"
+          cache: yarn
+          cache-dependency-path: packages/slack-activator/yarn.lock
+      - run: corepack enable
+      - run: yarn install --immutable
+      - run: yarn build
+      - name: Resolve mode
+        id: mode
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "mode=${{ inputs.mode }}" >> "$GITHUB_OUTPUT"
+          elif [ "${{ github.event.schedule }}" = "0 1 * * 1-5" ]; then
+            echo "mode=auto" >> "$GITHUB_OUTPUT"
+          else
+            echo "mode=away" >> "$GITHUB_OUTPUT"
+          fi
+      - run: yarn start --mode=${{ steps.mode.outputs.mode }}
