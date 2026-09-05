@@ -1,0 +1,16 @@
+display_information:
+  name: slack-activator
+features:
+  bot_user:
+    display_name: slack-activator
+    always_online: false
+oauth_config:
+  scopes:
+    user:
+      - users:write
+    bot:
+      - users:write
+settings:
+  org_deploy_enabled: false
+  socket_mode_enabled: false
+  token_rotation_enabled: false

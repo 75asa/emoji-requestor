@@ -1,0 +1,16 @@
+name: setAuto
+
+on:
+  schedule:
+    - cron: "0 1 * * 1-5"
+
+env:
+  SLACK_USER_TOKEN: ${{ secrets.SLACK_USER_TOKEN }}
+
+jobs:
+  setAuto:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: ./.github/actions/node-setup
+    - run: yarn start:setAuto
