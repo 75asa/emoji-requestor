@@ -1,7 +1,7 @@
-import fetch from "node-fetch";
 import { print as printGql } from "graphql/language/printer";
-import * as query from "./query";
+import fetch from "node-fetch";
 import * as constant from "../constant";
+import * as query from "./query";
 
 export const getEmoji = async () => {
   return fetch(constant.Kibela.END_POINT, {
@@ -17,8 +17,8 @@ export const getEmoji = async () => {
       query: printGql(query.emojiMutation),
     }),
   })
-    .then(response => {
+    .then((_response) => {
       console.info("query success");
     })
-    .catch(e => console.error(`fetch request error: ${e}`));
+    .catch((e) => console.error(`fetch request error: ${e}`));
 };

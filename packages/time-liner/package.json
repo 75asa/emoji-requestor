@@ -1,47 +1,27 @@
 {
   "name": "time-liner",
-  "description": "",
   "version": "2.0.0",
-  "author": "",
-  "dependencies": {
-    "@slack/bolt": "^5.1.0",
-    "@slack/types": "^3.1.0",
-    "dotenv": "^16.4.5"
-  },
-  "devDependencies": {
-    "@types/express": "^4.17.21",
-    "@types/node": "^20.14.0",
-    "@typescript-eslint/eslint-plugin": "^8.0.0",
-    "@typescript-eslint/parser": "^8.0.0",
-    "eslint": "^8.57.0",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-prettier": "^5.1.3",
-    "nodemon": "^3.1.0",
-    "prettier": "^3.3.0",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.5.0"
-  },
-  "engines": {
-    "node": ">=20"
-  },
-  "keywords": [],
+  "private": true,
+  "description": "指定の Slack チャンネルの投稿を別のチャンネルに転送する Bolt アプリ",
   "license": "ISC",
   "main": "lib/index.js",
   "scripts": {
     "build": "tsc -p .",
-    "build:live": "nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/index.ts",
-    "compile": "tsc",
-    "deploy": "git push origin HEAD && git push heroku master",
-    "dev": "nodemon --watch './src/*.ts' --exec 'ts-node' src/index.ts --trace-warnings",
-    "dev:watch": "nodemon -L -w src -e ts -x \"tsc && node --require dotenv/config --inspect=localhost:9229 --experimental-modules lib/index.js\"",
-    "format": "prettier --write './src/**/*.{ts,js}'",
-    "lint": "eslint --ext .ts,.tsx ./src --cache",
-    "lintfix": "eslint --ext .ts,.tsx ./src --cache --fix",
-    "local": "npm run build:live",
-    "ngrok": "ngrok http 3333",
-    "postinstall": "npm run build",
-    "release": "git checkout && git pull && npm version",
+    "typecheck": "tsc -p . --noEmit",
+    "dev": "tsx watch src/index.ts",
     "start": "node lib/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "ngrok": "ngrok http 3333"
+  },
+  "dependencies": {
+    "@slack/bolt": "^5.1.0",
+    "@slack/types": "^3.1.0",
+    "@slack/web-api": "^8.1.1",
+    "dotenv": "^16.4.5"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/node": "^20.14.0",
+    "tsx": "^4.23.13",
+    "typescript": "^5.9.3"
   }
 }

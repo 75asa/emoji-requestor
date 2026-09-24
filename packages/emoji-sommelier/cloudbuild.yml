@@ -1,6 +1,8 @@
+# Submit from the repository root:
+#   gcloud builds submit --config packages/emoji-sommelier/cloudbuild.yml .
 steps:
 - name: 'gcr.io/cloud-builders/docker'
-  args: [ 'build', '-f', 'Dockerfile',
+  args: [ 'build', '-f', 'packages/emoji-sommelier/Dockerfile',
                    '-t','gcr.io/$PROJECT_ID/emoji-syncher-app/${_STAGE}',
                    '--build-arg', 'STAGE=${_STAGE}',
                    '.'

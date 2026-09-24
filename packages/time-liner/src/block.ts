@@ -1,5 +1,5 @@
-import { KnownBlock } from "@slack/types";
-import { MessageEventParam } from "./bolt.interface";
+import type { KnownBlock } from "@slack/types";
+import type { MessageEventParam } from "./bolt.interface";
 
 export const dealBlock = async ({
   context,

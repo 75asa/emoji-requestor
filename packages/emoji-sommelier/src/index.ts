@@ -1,7 +1,7 @@
-import * as slack from "./slack";
-import * as handler from "./handler";
-import * as constant from "./constant";
 import type { Request, Response } from "express";
+import * as constant from "./constant";
+import * as handler from "./handler";
+import * as slack from "./slack";
 
 const app = slack.bolt.app;
 
@@ -10,10 +10,10 @@ app.command("/ping", async ({ command, payload, ack, say }) => {
   // コマンドリクエストを確認
   await ack();
   await say(`pong !!`)
-    .then(res => {
+    .then((res) => {
       console.log({ res });
     })
-    .catch(err => {
+    .catch((err) => {
       console.log({ err });
     });
 });
@@ -25,15 +25,15 @@ app.command("/sync-emoji", async ({ command, ack, say }) => {
   say("sync start !!");
   const result = await handler.syncEmoji(app);
   await say(`sync done !! ${result}`)
-    .then(res => {
+    .then((res) => {
       console.log({ res });
     })
-    .catch(err => {
+    .catch((err) => {
       console.log({ err });
     });
 });
 
-slack.bolt.receiver.app.get("sync-emoji", (req: Request, res: Response) => {
+slack.bolt.receiver.app.get("sync-emoji", (_req: Request, res: Response) => {
   res.sendStatus(200);
   handler.syncEmoji(app);
 });

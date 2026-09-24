@@ -1,5 +1,5 @@
 import { WebClient } from "@slack/web-api";
-import { Config } from "./Config";
+import type { Config } from "./Config";
 export class SlackStatus {
   #client;
   constructor({ TOKEN }: typeof Config.Slack.env) {

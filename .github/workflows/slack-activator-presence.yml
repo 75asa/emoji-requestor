@@ -19,10 +19,6 @@ on:
 env:
   SLACK_USER_TOKEN: ${{ secrets.SLACK_USER_TOKEN }}
 
-defaults:
-  run:
-    working-directory: packages/slack-activator
-
 jobs:
   presence:
     runs-on: ubuntu-latest
@@ -31,11 +27,10 @@ jobs:
       - run: corepack enable
       - uses: actions/setup-node@v7
         with:
-          node-version: "20.x"
-          cache: yarn
-          cache-dependency-path: packages/slack-activator/yarn.lock
-      - run: yarn install --immutable
-      - run: yarn build
+          node-version: "22.x"
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile --filter slack-activator...
+      - run: pnpm --filter slack-activator build
       - name: Resolve mode
         id: mode
         run: |
@@ -46,4 +41,4 @@ jobs:
           else
             echo "mode=away" >> "$GITHUB_OUTPUT"
           fi
-      - run: yarn start --mode=${{ steps.mode.outputs.mode }}
+      - run: pnpm --filter slack-activator start --mode=${{ steps.mode.outputs.mode }}

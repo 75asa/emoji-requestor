@@ -1,7 +1,13 @@
 node_modules/
+dist/
+lib/
+dest/
+coverage/
 .env
 .env.*
 !.env.example
+envs/.env.*
+!envs/.env.example
+.eslintcache
 *.log
 .DS_Store
-.eslintcache

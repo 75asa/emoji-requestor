@@ -1,37 +1,34 @@
 {
-  "name": "emoji-syncher",
+  "name": "emoji-sommelier",
   "version": "1.0.0",
+  "private": true,
+  "description": "Slack のカスタム絵文字を Kibela などの他サービスへ同期する",
   "author": "Asato Nago <nago@tam-bourine.co.jp>",
+  "license": "MIT",
+  "main": "dest/index.js",
+  "scripts": {
+    "build": "tsc -p .",
+    "typecheck": "tsc -p . --noEmit",
+    "dev": "tsx watch src/index.ts",
+    "start": "node dest/index.js",
+    "build:remote": "make gcr-push && make gcr-deploy",
+    "logs": "gcloud app logs read",
+    "logs:tail": "gcloud app logs tail"
+  },
   "dependencies": {
     "@slack/bolt": "^5.1.0",
     "@slack/types": "^3.1.0",
+    "@slack/web-api": "^8.1.1",
     "dotenv": "^16.4.5",
     "graphql": "^16.9.0",
     "graphql-tag": "^2.12.6",
     "node-fetch": "^2.7.0"
   },
   "devDependencies": {
-    "@types/express": "^4.17.21",
+    "@types/express": "^5.0.0",
     "@types/node": "^20.14.0",
     "@types/node-fetch": "^2.6.11",
-    "nodemon": "^3.1.0",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.5.0"
-  },
-  "engines": {
-    "node": ">=20"
-  },
-  "license": "MIT",
-  "main": "index.js",
-  "repository": "git@github.com:75asa/emoji-syncher.git",
-  "scripts": {
-    "build": "tsc -p .",
-    "build:live": "nodemon --watch 'src/**/*.ts' --exec \"ts-node\" src/index.ts",
-    "build:remote": "make gcr-push && make gcr-deploy",
-    "build:watch": "tsc --watch",
-    "compile": "tsc",
-    "logs": "gcloud app logs read",
-    "logs:tail": "gcloud app logs tail",
-    "start": "node dest/index.js"
+    "tsx": "^4.23.13",
+    "typescript": "^5.9.3"
   }
 }

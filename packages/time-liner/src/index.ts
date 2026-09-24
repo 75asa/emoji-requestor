@@ -1,9 +1,9 @@
 import { App, LogLevel } from "@slack/bolt";
-import { ChatPostMessageArguments } from "@slack/web-api";
+import type { ChatPostMessageArguments } from "@slack/web-api";
 import dotenv from "dotenv";
-import * as middleware from "./customMiddleware";
 import * as blocKit from "./block";
-import { TimelineMessage } from "./bolt.interface";
+import type { TimelineMessage } from "./bolt.interface";
+import * as middleware from "./customMiddleware";
 
 dotenv.config();
 
@@ -55,7 +55,7 @@ app.message(middleware.getChannelInfo, async ({ client, context, message }) => {
 
   console.log(JSON.stringify(context.files, null, 4));
 
-  if (context.files && context.files.files.length) {
+  if (context.files?.files.length) {
     // snippet, POST がある場合は blocks があると送信できないので本文投稿後に再度ファイルだけ投稿
     // icon_url, usernameもpayloadに存在するとattachmentの展開がされないので削除
     delete msgOption.blocks;

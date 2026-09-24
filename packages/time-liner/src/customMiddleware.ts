@@ -1,5 +1,5 @@
-import { App } from "@slack/bolt";
-import { MiddlewareParam } from "./bolt.interface";
+import type { App } from "@slack/bolt";
+import type { MiddlewareParam } from "./bolt.interface";
 
 export const notBotMessages: any = async ({
   message,

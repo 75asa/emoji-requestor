@@ -3,12 +3,10 @@ services:
   app:
     container_name: "slack-app"
     build:
-      dockerfile: Dockerfile
-      context: ./
+      dockerfile: packages/emoji-sommelier/Dockerfile
+      context: ../..
       args:
         STAGE: dev
-    volumes:
-      - ./:/app
     ports:
       - "8080:8080"
     tty: true

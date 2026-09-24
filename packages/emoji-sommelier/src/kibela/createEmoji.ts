@@ -1,9 +1,9 @@
-import fetch from "node-fetch";
 import { print as printGql } from "graphql/language/printer";
-import * as query from "./query";
+import fetch from "node-fetch";
 import * as constant from "../constant";
+import * as query from "./query";
 
-const rename = (codeName: string) => {
+export const rename = (codeName: string) => {
   let result = "";
   // kibela の絵文字は `-` が使えないため変換
   const regex1 = /-/g;
@@ -14,7 +14,7 @@ const rename = (codeName: string) => {
 };
 
 // 画像 URL を取得して data URI (base64) に変換する
-const encodeImageFromURL = async (imageUrl: string): Promise<string> => {
+export const encodeImageFromURL = async (imageUrl: string): Promise<string> => {
   const response = await fetch(imageUrl);
   if (!response.ok) {
     throw new Error(`failed to fetch image: ${response.status} ${imageUrl}`);
@@ -45,12 +45,12 @@ export const createEmoji = async (code: string, imageUrl: string) => {
       },
     }),
   })
-    .then(response => {
+    .then((response) => {
       console.info(
         `create request ${code}, renamed => ${renemedCode}: ${JSON.stringify(
-          response
-        )}`
+          response,
+        )}`,
       );
     })
-    .catch(e => console.error(`fetch request error: ${e}`));
+    .catch((e) => console.error(`fetch request error: ${e}`));
 };

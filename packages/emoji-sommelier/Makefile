@@ -26,9 +26,9 @@ logs:
 gcr-push:
 	export STAGE=$(STAGE)
 	export PROJECT=$(PROJECT)
-	gcloud builds submit \
+	cd ../.. && gcloud builds submit \
   --project="$(PROJECT)" \
-  --config cloudbuild.yml
+  --config packages/emoji-sommelier/cloudbuild.yml .
 gcr-deploy:
 	export STAGE=$(STAGE)
 	export SERVICE_NAME=$(SERVICE_NAME)

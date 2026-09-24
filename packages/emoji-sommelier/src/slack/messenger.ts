@@ -1,17 +1,17 @@
-import {
-  MessengerSend,
-  GenerateMessage,
-  ChatPostMessageArguments,
-} from "../types/messenger";
 import * as constant from "../constant";
+import type {
+  ChatPostMessageArguments,
+  GenerateMessage,
+  MessengerSend,
+} from "../types/messenger";
 
-const generateOption = ({ context, event }: GenerateMessage) => {
+export const generateOption = ({ context, event }: GenerateMessage) => {
   const isAddEvent = event.subtype === "add";
   let msgText = "";
   if (isAddEvent) {
     msgText = `新しい絵文字 :${event.name}: \`:${event.name}:\` が登録されたよ〜`;
   } else {
-    const deletedNames = event.names?.map(name => {
+    const deletedNames = event.names?.map((name) => {
       return `\`:${name}:\``;
     });
     msgText = `残念やけど絵文字 ${deletedNames} は削除されました。。。`;

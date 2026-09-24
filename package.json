@@ -1,0 +1,25 @@
+{
+  "name": "emoji-requestor",
+  "private": true,
+  "description": "Slack tools monorepo: time-liner, emoji-sommelier, slack-activator",
+  "packageManager": "pnpm@12.3.4",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "pnpm -r build",
+    "typecheck": "pnpm -r typecheck",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "format": "biome format --write .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "check": "pnpm lint && pnpm typecheck && pnpm test"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.12",
+    "@types/node": "^20.14.0",
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.11"
+  }
+}

@@ -1,4 +1,0 @@
-envs/.env.*
-!envs/.env.example
-node_modules/
-dest/
