@@ -16,13 +16,13 @@
     "dev:setAway": "tsx src/main.ts --mode=away"
   },
   "dependencies": {
-    "@slack/web-api": "^8.1.1",
-    "dotenv": "^16.4.5",
+    "@slack/web-api": "^8.2.0",
+    "dotenv": "^18.0.9",
     "ts-command-line-args": "^2.5.1"
   },
   "devDependencies": {
-    "@types/node": "^20.14.0",
+    "@types/node": "^26.6.6",
     "tsx": "^4.23.13",
-    "typescript": "^5.9.3"
+    "typescript": "^7.0.2"
   }
 }
